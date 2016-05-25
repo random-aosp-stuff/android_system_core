@@ -719,6 +719,8 @@ void engrave_tombstone_proto(Tombstone* tombstone, unwindstack::AndroidUnwinder*
   } else {
     result.set_guest_arch(Architecture::NONE);
   }
+  result.set_calyxos_version(android::base::GetProperty("ro.calyxos.version", "unknown"));
+  result.set_build_version_incremental(android::base::GetProperty("ro.build.version.incremental", "unknown"));
   result.set_build_fingerprint(android::base::GetProperty("ro.build.fingerprint", "unknown"));
   result.set_revision(android::base::GetProperty("ro.revision", "unknown"));
   result.set_timestamp(get_timestamp());

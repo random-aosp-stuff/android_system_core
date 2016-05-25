@@ -594,6 +594,8 @@ static void print_guest_thread(CallbackType callback, const Tombstone& tombstone
 
 bool tombstone_proto_to_text(const Tombstone& tombstone, CallbackType callback) {
   CBL("*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***");
+  CBL("CalyxOS version: '%s'", tombstone.calyxos_version().c_str());
+  CBL("Build incremental version: '%s'", tombstone.build_version_incremental().c_str());
   CBL("Build fingerprint: '%s'", tombstone.build_fingerprint().c_str());
   CBL("Revision: '%s'", tombstone.revision().c_str());
   CBL("ABI: '%s'", abi_string(tombstone.arch()));
