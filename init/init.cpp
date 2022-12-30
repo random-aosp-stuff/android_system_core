@@ -798,9 +798,10 @@ static void InstallSignalFdHandler(Epoll* epoll) {
 }
 
 void HandleKeychord(const std::vector<int>& keycodes) {
-    // Only handle keychords if adb is enabled.
+    // Only handle keychords if adb is enabled or keychords are enabled via sysprop.
     std::string adb_enabled = android::base::GetProperty("init.svc.adbd", "");
-    if (adb_enabled != "running") {
+    auto keychords_enabled = android::base::GetBoolProperty("persist.init.keychords", false);
+    if (adb_enabled != "running" && !keychords_enabled) {
         LOG(WARNING) << "Not starting service for keychord " << android::base::Join(keycodes, ' ')
                      << " because ADB is disabled";
         return;
